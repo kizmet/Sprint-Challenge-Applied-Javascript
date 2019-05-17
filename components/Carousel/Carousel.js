@@ -4,25 +4,25 @@ class Carousel {
         this.left_button = document.querySelector('.left-button');
         this.right_button = document.querySelector('.right-button');
         this.images = document.querySelectorAll('div.carousel > img');
-        this.left_button.addEventListener('click', () => this.slider());
-        this.right_button.addEventListener('click', () => this.slider());
+        this.left_button.addEventListener('click', () => this.slider(-1));
+        this.right_button.addEventListener('click', () => this.slider(1));
         this.images.forEach((image,i) => {
             image.id = `img-${1+i}`; i+1;
         })
     }
 
-    slider () {
+    slider (number) {
         this.images2 = document.querySelectorAll('div.carousel > img');
         this.images2.forEach((image,i) => {
-            var w = image.id; //"img1"
-            var x = w.split('-');
-            var y=x[1];
-            var z = Number(y); 
-            if (z < 4) { image.id = `img-${z +1}`; i; 
+            var z = (image.id.split('-'))[1]; //"img1"
+             z = Number(z); 
+            if (z < 4) { image.id = `img-${Math.abs((z +1 )*number)}`; i; 
             } else {
                 image.id = 'img-1'
             }
         })
+
+        
 
     }
 
