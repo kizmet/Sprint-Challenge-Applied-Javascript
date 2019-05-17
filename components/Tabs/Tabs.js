@@ -2,31 +2,45 @@ class tabElement {
   constructor(tabElement){
     // assign this.tabElement to the tabElement DOM reference
     this.tabElement = tabElement;
+    const tabClass = tabElement.className;
+    // this.tabClass = tabClass;
     
     // Get the `data-tab` value from this.tabElement and store it here
     this.tabData = document.querySelector(`.tab[data-tab='${tabElement.dataset.tab}']`);
-    
+
+    // if (this.tabState == "tab active-tab") {
+    //   this.tabData.dataset.tab == "all";
+    //    }
     // We need to find out if a user clicked 'all' cards or a specific category.  Follow the instructions below to accomplish this task:    
 
     // Check to see if this.tabData is equal to 'all'
-    if(this.tabData.dataset.tab == 'all'){
+    
+    if(this.tabData.dataset.tab == 'all' ){  
       // If `all` is true, select all cards regardless of their data attribute values
       this.cards = document.querySelectorAll('.card');
-    } else {
+    }   else {
       // else if `all` is false, only select the cards with matching this.tabData values
       this.cards = document.querySelectorAll(`.card[data-tab='${tabElement.dataset.tab}']`);
     }
     
      // Map over the newly converted NodeList we just created in our if statement above. Convert each this.cards element into a new instance of the TabCard class. Pass in a card object to the TabCard class. 
+    // if (tabClass.length == 3) {
+    //   this.cards = document.querySelectorAll('.card');
+    //   this.cards = Array.from(this.cards).map(card =>  new TabCard(card));
+      
+    // } 
+
     this.cards = Array.from(this.cards).map(card =>  new TabCard(card));
 
     // Add a click event that invokes this.selectTab
-    this.tabElement.addEventListener('click', () => this.selectTab());
+    tabElement.addEventListener('click', () => this.selectTab(tabClass));
   }
 
-  selectTab(){
+  selectTab(tabClass){
 
     // Select all elements with the .tab class on them
+    
+    console.log(this.tabElement.className);
     const tabs = document.querySelectorAll('.tab');
     
     // Iterate through the NodeList removing the .active-tab class from each element
@@ -43,9 +57,13 @@ class tabElement {
     
     // Add a class of ".active-tab" to this.tabElement
     this.tabElement.setAttribute('class', 'tab active-tab');
+    console.log(this.tabElement.className);
   
     // Notice we are looping through the this.cards array and invoking selectCard() from the TabCard class. Just un-comment the code and study what is happening here.
+    // this.cards.forEach(card => card.selectCard());
+    
     this.cards.forEach(card => card.selectCard());
+     
   }
 }
 

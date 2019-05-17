@@ -16,12 +16,19 @@ class Carousel {
         this.images2.forEach((image,i) => {
             var z = (image.id.split('-'))[1]; //"img1"
              z = Number(z); 
-            if (z < 4) { image.id = `img-${Math.abs((z +1 )*number)}`; i; 
-            } else {
-                image.id = 'img-1'
-            }
+             z = z + (1*number);
+             if (z == 5) {z =1} else if (z==0) {z=4} else z==z;
+             image.id = `img-${z}`
         })
+        // var imageID = "";
+        // for (i=0; i < images2.length; i++) {
+        //         var w = image.id; //"img1"
+        //         var x = w.split('-');
+        //         var y = x[1];
+        //         var z = Number(y);
+        //         image.id += "img-" +z+i;
 
+        // }
         
 
     }
